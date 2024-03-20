@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import joblib
-import numpy as np
+import pandas as pd
 
 app = FastAPI()
 templates = Jinja2Templates(directory="app/templates")
@@ -14,8 +14,6 @@ model = joblib.load("app/ml/loan_approval_model.pkl")
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
-
-@app.post("/submit")
 
 @app.post("/submit")
 async def submit_loan_application(request: Request,
@@ -36,15 +34,27 @@ async def submit_loan_application(request: Request,
                                     loan_purpose: str = Form(...),
                                     has_cosigner: str = Form(...)
                                 ):
+    # Create a DataFrame from the form inputs
+    input_data = pd.DataFrame({
+        "Age": [age],
+        "Income": [income],
+        "LoanAmount": [loan_amount],
+        "CreditScore": [credit_score],
+        "MonthsEmployed": [months_employed],
+        "NumCreditLines": [num_credit_lines],
+        "InterestRate": [interest_rate],
+        "LoanTerm": [loan_term],
+        "DTIRatio": [dti_ratio],
+        "Education": [education],
+        "EmploymentType": [employment_type],
+        "MaritalStatus": [marital_status],
+        "HasMortgage": [has_mortgage],
+        "HasDependents": [has_dependents],
+        "LoanPurpose": [loan_purpose],
+        "HasCoSigner": [has_cosigner]
+    })
 
-
-    input_data = np.array([[age, income, loan_amount, credit_score, months_employed, num_credit_lines,
-                            interest_rate, loan_term, dti_ratio, education, employment_type,
-                            marital_status, has_mortgage, has_dependents, loan_purpose, has_cosigner]])
-    
-    # Make prediction
     prediction = model.predict(input_data)[0]
-    
-    # Render prediction result
+
     result = "Loan approved" if prediction == 1 else "Loan denied"
     return {"result": result}
