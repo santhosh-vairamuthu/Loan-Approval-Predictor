@@ -6,112 +6,117 @@
     <title>Loan Approval Predictor</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body>
-    <div class="container mt-5">
-        <h1 class="mb-4">Loan Approval Predictor</h1>
-        <form id="loanForm ">
-            <div class="form-group">
-                <label for="age">Age</label>
-                <input type="number" class="form-control" id="age" name="age" required>
-            </div>
-            <div class="form-group">
-                <label for="income">Income</label>
-                <input type="number" class="form-control" id="income" name="income" required>
-            </div>
-            <div class="form-group">
-                <label for="loanAmount">Loan Amount</label>
-                <input type="number" class="form-control" id="loanAmount" name="loan_amount" min="1" required>
-            </div>
-            <div class="form-group">
-                <label for="creditScore">Credit Score</label>
-                <input type="number" class="form-control" id="creditScore" name="credit_score" min="1" required>
-            </div>
-            <div class="form-group">
-                <label for="monthsEmployed">Months Employed</label>
-                <input type="number" class="form-control" id="monthsEmployed" name="months_employed" min="1" required>
-            </div>
-            <div class="form-group">
-                <label for="numCreditLines">Number of Credit Lines</label>
-                <input type="number" class="form-control" id="numCreditLines" name="num_credit_lines" min="1" required>
-            </div>
-            <div class="form-group">
-                <label for="interestRate">Interest Rate</label>
-                <input type="number" class="form-control" id="interestRate" name="interest_rate" min="0.1" required>
-            </div>
-            <div class="form-group">
-                <label for="loanTerm">Loan Term</label>
-                <input type="number" class="form-control" id="loanTerm" name="loan_term" min="1" required>
-            </div>
-            <div class="form-group">
-                <label for="dtiRatio">DTI Ratio</label>
-                <input type="number" class="form-control" id="dtiRatio" name="dti_ratio" min="0.1" max="1" required>
-            </div>
-            <div class="form-select mb-3 mt-3">
-                <label for="education">Education</label>
-                <select id="education" name="education" class="form-control">
-                    <option disabled>Select your maximum education</option>
-                    <option value="Bachelor's">Bachelor's</option>
-                    <option value="High School">High School</option>
-                    <option value="Master's">Master's</option>
-                </select>
-            </div>
-            <div class="form-select mb-3">
-                <label for="employmentType">Employment Type</label>
-                <select id="employmentType" name="employment_type" class="form-control">
-                    <option disabled>Select your Employment Type</option>
-                    <option value="Unemployed">Unemployed</option>
-                    <option value="Self-employed">Self-employed</option>
-                    <option value="Part-time">Part-time</option>
-                    <option value="Full-time">Full-time</option>
-                </select>
-            </div>
-            <div class="form-select mb-3">
-                <label for="maritalStatus">Marital Status</label>
-                <select id="maritalStatus" name="marital_status" class="form-control">
-                    <option disabled>Select your current marital status</option>
-                    <option value="Single">Single</option>
-                    <option value="Married">Married</option>
-                    <option value="Divorced">Divorced</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="has_mortgage">Has Mortgage</label>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="has_mortgage" name="has_mortgage" value="Yes">
-                    <label class="form-check-label" for="has_mortgage">Yes</label>
+<body class="bg-info-subtle">
+    <div class="container">
+        <h1 class="mb-4 align-items-center text-center fw-bolder font-monospace mt-5 text-info-emphasis">Loan Approval Predictor</h1>
+        <div class="container border mb-4 p-3 rounded-2 font-monospace border-info bg-white" style="width:75%;">
+            <form id="loanForm">
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" class="form-control" id="age" name="age" required>
                 </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="has_dependents">Has Dependents</label>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="has_dependents" name="has_dependents" value="Yes">
-                    <label class="form-check-label" for="has_dependents">Yes</label>
+                <div class="form-group">
+                    <label for="income">Income</label>
+                    <input type="number" class="form-control" id="income" name="income" required>
                 </div>
-            </div>
-            <div class="form-group mb-3">
-                <label for="loan_purpose">Loan Purpose</label>
-                <select class="form-control" id="loan_purpose" name="loan_purpose">
-                    <option selected disabled>Select loan purpose</option>
-                    <option value="Education">Education</option>
-                    <option value="Home">Home</option>
-                    <option value="Auto">Auto</option>
-                    <option value="Business">Business</option>
-                    <option value="Others">Others</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="has_cosigner">Has Co-Signer</label>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="has_cosigner" name="has_cosigner" value="Yes">
-                    <label class="form-check-label" for="has_cosigner">Yes</label>
+                <div class="form-group">
+                    <label for="loanAmount">Loan Amount</label>
+                    <input type="number" class="form-control" id="loanAmount" name="loan_amount" min="1" required>
                 </div>
+                <div class="form-group">
+                    <label for="creditScore">Credit Score</label>
+                    <input type="number" class="form-control" id="creditScore" name="credit_score" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="monthsEmployed">Months Employed</label>
+                    <input type="number" class="form-control" id="monthsEmployed" name="months_employed" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="numCreditLines">Number of Credit Lines</label>
+                    <input type="number" class="form-control" id="numCreditLines" name="num_credit_lines" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="interestRate">Interest Rate</label>
+                    <input type="number" class="form-control" id="interestRate" name="interest_rate" min="0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="loanTerm">Loan Term</label>
+                    <input type="number" class="form-control" id="loanTerm" name="loan_term" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="dtiRatio">DTI Ratio</label>
+                    <input type="number" class="form-control" id="dtiRatio" name="dti_ratio" min="0.1" max="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="education">Education</label>
+                    <select id="education" name="education" class="form-control">
+                        <option disabled selected>Select your maximum education</option>
+                        <option value="Bachelor's">Bachelor's</option>
+                        <option value="High School">High School</option>
+                        <option value="Master's">Master's</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="employmentType">Employment Type</label>
+                    <select id="employmentType" name="employment_type" class="form-control">
+                        <option disabled selected>Select your Employment Type</option>
+                        <option value="Unemployed">Unemployed</option>
+                        <option value="Self-employed">Self-employed</option>
+                        <option value="Part-time">Part-time</option>
+                        <option value="Full-time">Full-time</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="maritalStatus">Marital Status</label>
+                    <select id="maritalStatus" name="marital_status" class="form-control">
+                        <option disabled selected>Select your current marital status</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="has_mortgage">Has Mortgage</label>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="has_mortgage" name="has_mortgage" value="Yes">
+                        <label class="form-check-label" for="has_mortgage">Yes</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="has_dependents">Has Dependents</label>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="has_dependents" name="has_dependents" value="Yes">
+                        <label class="form-check-label" for="has_dependents">Yes</label>
+                    </div>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="loan_purpose">Loan Purpose</label>
+                    <select class="form-control" id="loan_purpose" name="loan_purpose">
+                        <option disabled selected>Select loan purpose</option>
+                        <option value="Education">Education</option>
+                        <option value="Home">Home</option>
+                        <option value="Auto">Auto</option>
+                        <option value="Business">Business</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="has_cosigner">Has Co-Signer</label>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="has_cosigner" name="has_cosigner" value="Yes">
+                        <label class="form-check-label" for="has_cosigner">Yes</label>
+                    </div>
+                </div>
+                
+                <div class="container mb-3 justify-content-center text-center align-items-center">
+                    <button type="button" onclick="getResult()" class="btn btn-info">Submit</button>
+                </div>
+            </form>
+            <div  class="mt-4 mb-4 align-center justify-content-center border bg-info-subtle border-info text-info-emphasis rounded-4 mt-2 mb-5 p-2" id="res" style="display:none;width:75%;margin-left:15%;">
+                <p><span class="fw-light fs-3" >Result : </span><span id="result" class="fw-bold fs-2"></span></p>
             </div>
-            
-            <button type="button" onclick="getResult()" class="btn btn-primary mb-3">Submit</button>
-        </form>
-        <div  class="mt-4 justify-content-center  rounded-4 mt-2 mb-5 bg-info-subtle" id="res" style="display:none;">
-            <p><span class="fw-light fs-2" >Result : </span><span id="result" class="fw-bold fs-1"></span></p>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -119,8 +124,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script>
         function getResult() {
-            var formData = $("#loanForm").serialize();
+            document.getElementById("res").style.display = "none";
             
+            var formData = {
+                'has_mortgage': $('#has_mortgage').is(':checked') ? 'Yes' : 'No',
+                'has_dependents': $('#has_dependents').is(':checked') ? 'Yes' : 'No',
+                'has_cosigner': $('#has_cosigner').is(':checked') ? 'Yes' : 'No',
+                'age': $('#age').val(),
+                'income': $('#income').val(),
+                'loan_amount': $('#loanAmount').val(),
+                'credit_score': $('#creditScore').val(),
+                'months_employed': $('#monthsEmployed').val(),
+                'num_credit_lines': $('#numCreditLines').val(),
+                'interest_rate': $('#interestRate').val(),
+                'loan_term': $('#loanTerm').val(),
+                'dti_ratio': $('#dtiRatio').val(),
+                'education': $('#education').val(),
+                'employment_type': $('#employmentType').val(),
+                'marital_status': $('#maritalStatus').val(),
+                'loan_purpose': $('#loan_purpose').val()
+            };
+        
             $.ajax({
                 type: 'POST',
                 url: '/submit',

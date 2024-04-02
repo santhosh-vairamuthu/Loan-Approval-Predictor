@@ -4,12 +4,15 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import joblib
 import pandas as pd
+from collections import Counter
 
 app = FastAPI()
 templates = Jinja2Templates(directory="app/templates")
 
-# Load the trained model
-model = joblib.load("app/ml/loan_approval_model.pkl")
+# Load the trained models
+model_ID3 = joblib.load("app/ml/loan_approval_model_ID3.pkl")
+model_C45 = joblib.load("app/ml/loan_approval_model_C45.pkl")
+model_CART = joblib.load("app/ml/loan_approval_model_CART.pkl")
 
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
@@ -54,7 +57,17 @@ async def submit_loan_application(request: Request,
         "HasCoSigner": [has_cosigner]
     })
 
-    prediction = model.predict(input_data)[0]
+    # Make predictions using all three models
+    prediction_ID3 = model_ID3.predict(input_data)[0]
+    prediction_C45 = model_C45.predict(input_data)[0]
+    prediction_CART = model_CART.predict(input_data)[0]
 
-    result = "Loan approved" if prediction == 1 else "Loan denied"
+    # Count occurrences of each prediction
+    predictions = [prediction_ID3, prediction_C45, prediction_CART]
+    prediction_counts = Counter(predictions)
+
+    # Return the prediction that occurred most frequently
+    most_common_prediction = max(prediction_counts, key=prediction_counts.get)
+    result = "Loan approved" if most_common_prediction == 1 else "Loan denied"
+    
     return {"result": result}

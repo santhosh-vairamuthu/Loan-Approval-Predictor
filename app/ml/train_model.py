@@ -4,7 +4,6 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-from sklearn.metrics import accuracy_score
 import joblib
 import os
 
@@ -41,22 +40,19 @@ preprocessor = ColumnTransformer(
 # Split data into train and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Create pipeline with preprocessing and classifier
-pipeline = Pipeline(steps=[('preprocessor', preprocessor),
-                           ('classifier', DecisionTreeClassifier(random_state=42))])
+# Define and train Decision Tree classifiers with different algorithms
+model_ID3 = Pipeline(steps=[('preprocessor', preprocessor),('classifier', DecisionTreeClassifier(random_state=42, criterion='entropy'))])
+model_ID3.fit(X_train, y_train)
 
-# Train Decision Tree classifier
-pipeline.fit(X_train, y_train)
+model_C45 = Pipeline(steps=[('preprocessor', preprocessor),('classifier', DecisionTreeClassifier(random_state=42, criterion='entropy', splitter='best'))])
+model_C45.fit(X_train, y_train)
 
-# Evaluate model
-train_preds = pipeline.predict(X_train)
-test_preds = pipeline.predict(X_test)
-train_accuracy = accuracy_score(y_train, train_preds)
-test_accuracy = accuracy_score(y_test, test_preds)
-print(f"Training accuracy: {train_accuracy:.2f}")
-print(f"Test accuracy: {test_accuracy:.2f}")
+model_CART = Pipeline(steps=[('preprocessor', preprocessor),('classifier', DecisionTreeClassifier(random_state=42, criterion='gini', splitter='best'))])
+model_CART.fit(X_train, y_train)
 
-# Save model
-model_path = "loan_approval_model.pkl"
-joblib.dump(pipeline, model_path)
-print(f"Model saved to {model_path}")
+# Save models
+joblib.dump(model_ID3, "loan_approval_model_ID3.pkl")
+joblib.dump(model_C45, "loan_approval_model_C45.pkl")
+joblib.dump(model_CART, "loan_approval_model_CART.pkl")
+
+print("Models saved successfully.")
